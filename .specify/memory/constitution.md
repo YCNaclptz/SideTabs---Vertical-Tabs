@@ -1,50 +1,100 @@
-# [PROJECT_NAME] Constitution
-<!-- Example: Spec Constitution, TaskFlow Constitution, etc. -->
+<!-- @format -->
+
+<!--
+Sync Impact Report:
+- Version change: Initial → 1.0.0
+- Added principles: All core principles established
+- Added sections: Development Workflow, Quality Standards
+- Templates requiring updates: ✅ All templates checked and aligned
+- Follow-up TODOs: None (all placeholders filled)
+-->
+
+# SideTabs Constitution
 
 ## Core Principles
 
-### [PRINCIPLE_1_NAME]
-<!-- Example: I. Library-First -->
-[PRINCIPLE_1_DESCRIPTION]
-<!-- Example: Every feature starts as a standalone library; Libraries must be self-contained, independently testable, documented; Clear purpose required - no organizational-only libraries -->
+### I. Tab Management Focus
 
-### [PRINCIPLE_2_NAME]
-<!-- Example: II. CLI Interface -->
-[PRINCIPLE_2_DESCRIPTION]
-<!-- Example: Every library exposes functionality via CLI; Text in/out protocol: stdin/args → stdout, errors → stderr; Support JSON + human-readable formats -->
+Every feature MUST enhance the core tab management experience. Features must solve real
+tab organization, navigation, or productivity problems. No feature creep into unrelated
+browser functionality.
 
-### [PRINCIPLE_3_NAME]
-<!-- Example: III. Test-First (NON-NEGOTIABLE) -->
-[PRINCIPLE_3_DESCRIPTION]
-<!-- Example: TDD mandatory: Tests written → User approved → Tests fail → Then implement; Red-Green-Refactor cycle strictly enforced -->
+**Rationale**: SideTabs exists specifically to solve tab chaos - maintaining focus
+ensures resources go toward solving that problem well.
 
-### [PRINCIPLE_4_NAME]
-<!-- Example: IV. Integration Testing -->
-[PRINCIPLE_4_DESCRIPTION]
-<!-- Example: Focus areas requiring integration tests: New library contract tests, Contract changes, Inter-service communication, Shared schemas -->
+### II. Performance First
 
-### [PRINCIPLE_5_NAME]
-<!-- Example: V. Observability, VI. Versioning & Breaking Changes, VII. Simplicity -->
-[PRINCIPLE_5_DESCRIPTION]
-<!-- Example: Text I/O ensures debuggability; Structured logging required; Or: MAJOR.MINOR.BUILD format; Or: Start simple, YAGNI principles -->
+Tab operations MUST complete within 100ms for common actions (switch, close, group).
+Memory usage MUST remain under 50MB baseline regardless of tab count. No blocking
+operations on UI thread.
 
-## [SECTION_2_NAME]
-<!-- Example: Additional Constraints, Security Requirements, Performance Standards, etc. -->
+**Rationale**: Tab management tools that slow down browsing defeat their purpose.
+Users need instant response when managing tabs.
 
-[SECTION_2_CONTENT]
-<!-- Example: Technology stack requirements, compliance standards, deployment policies, etc. -->
+### III. Data Privacy
 
-## [SECTION_3_NAME]
-<!-- Example: Development Workflow, Review Process, Quality Gates, etc. -->
+User browsing data MUST remain local unless explicitly consented for cloud sync.
+No analytics without opt-in. Clear data deletion options required.
 
-[SECTION_3_CONTENT]
-<!-- Example: Code review requirements, testing gates, deployment approval process, etc. -->
+**Rationale**: Tab data reveals browsing patterns - users must maintain control
+over this sensitive information.
+
+### IV. Accessibility Integration
+
+All UI components MUST meet WCAG 2.1 AA standards. Keyboard navigation required
+for all tab operations. Screen reader compatibility mandatory.
+
+**Rationale**: Tab management should be available to all users regardless of
+abilities or interaction preferences.
+
+### V. Browser Compatibility
+
+Features MUST work consistently across Chrome, Firefox, Safari, and Edge.
+No browser-specific APIs unless graceful fallbacks provided.
+
+**Rationale**: Users shouldn't be locked into specific browsers to benefit
+from improved tab management.
+
+## Quality Standards
+
+### Code Quality
+
+- TypeScript mandatory for type safety
+- Jest unit tests required (minimum 80% coverage)
+- ESLint + Prettier for consistency
+- No console.log statements in production builds
+
+### Security Standards
+
+- Content Security Policy implemented
+- Manifest v3 compliance for Chrome extensions
+- Regular dependency security audits
+- Secure storage for user preferences
+
+## Development Workflow
+
+### Feature Development
+
+1. All features start with user problem definition
+2. Design mockups required before implementation
+3. Accessibility review during design phase
+4. Performance impact assessment required
+5. Cross-browser testing mandatory
+
+### Code Review Process
+
+- All code requires review before merge
+- Performance implications must be assessed
+- Accessibility compliance verified
+- Browser compatibility confirmed
 
 ## Governance
-<!-- Example: Constitution supersedes all other practices; Amendments require documentation, approval, migration plan -->
 
-[GOVERNANCE_RULES]
-<!-- Example: All PRs/reviews must verify compliance; Complexity must be justified; Use [GUIDANCE_FILE] for runtime development guidance -->
+This constitution supersedes all other development practices. All pull requests
+must verify compliance with core principles. Any deviation requires documented
+justification and team approval.
 
-**Version**: [CONSTITUTION_VERSION] | **Ratified**: [RATIFICATION_DATE] | **Last Amended**: [LAST_AMENDED_DATE]
-<!-- Example: Version: 2.1.1 | Ratified: 2025-06-13 | Last Amended: 2025-07-16 -->
+Amendment process: Proposed changes require majority team approval and documentation
+of impact on existing features. Version increments follow semantic versioning.
+
+**Version**: 1.0.0 | **Ratified**: 2026-01-13 | **Last Amended**: 2026-01-13

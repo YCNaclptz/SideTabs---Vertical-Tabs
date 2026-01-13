@@ -1,3 +1,5 @@
+<!-- @format -->
+
 # Implementation Plan: [FEATURE]
 
 **Branch**: `[###-feature-name]` | **Date**: [DATE] | **Spec**: [link]
@@ -29,9 +31,13 @@
 
 ## Constitution Check
 
-*GATE: Must pass before Phase 0 research. Re-check after Phase 1 design.*
+_GATE: Must pass before Phase 0 research. Re-check after Phase 1 design._
 
-[Gates determined based on constitution file]
+- [ ] **Tab Management Focus**: Feature directly enhances tab organization, navigation, or productivity
+- [ ] **Performance Requirements**: Target <100ms response time, <50MB memory impact documented
+- [ ] **Data Privacy**: Local data storage plan defined, no analytics without explicit consent
+- [ ] **Accessibility**: WCAG 2.1 AA compliance plan, keyboard navigation design included
+- [ ] **Browser Compatibility**: Chrome, Firefox, Safari, Edge compatibility confirmed or fallbacks planned
 
 ## Project Structure
 
@@ -48,6 +54,7 @@ specs/[###-feature]/
 ```
 
 ### Source Code (repository root)
+
 <!--
   ACTION REQUIRED: Replace the placeholder tree below with the concrete layout
   for this feature. Delete unused options and expand the chosen structure with
@@ -98,7 +105,7 @@ directories captured above]
 
 > **Fill ONLY if Constitution Check has violations that must be justified**
 
-| Violation | Why Needed | Simpler Alternative Rejected Because |
-|-----------|------------|-------------------------------------|
-| [e.g., 4th project] | [current need] | [why 3 projects insufficient] |
-| [e.g., Repository pattern] | [specific problem] | [why direct DB access insufficient] |
+| Violation                  | Why Needed         | Simpler Alternative Rejected Because |
+| -------------------------- | ------------------ | ------------------------------------ |
+| [e.g., 4th project]        | [current need]     | [why 3 projects insufficient]        |
+| [e.g., Repository pattern] | [specific problem] | [why direct DB access insufficient]  |
