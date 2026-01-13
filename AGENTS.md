@@ -1,0 +1,3 @@
+<!-- @format -->
+
+We're going to be using slash command from `.github\prompts\`
