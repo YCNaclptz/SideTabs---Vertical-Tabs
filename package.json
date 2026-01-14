@@ -2,7 +2,7 @@
 	"name": "sidetabs",
 	"displayName": "SideTabs - Vertical Tabs",
 	"description": "Vertical tab management in sidebar",
-	"version": "0.1.0",
+	"version": "0.1.1",
 	"publisher": "sidetabs",
 	"engines": {
 		"vscode": "^1.108.0"

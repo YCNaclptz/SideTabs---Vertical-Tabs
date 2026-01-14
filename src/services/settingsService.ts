@@ -3,6 +3,8 @@
 import * as vscode from 'vscode';
 import { CONFIG_KEYS, DEFAULTS } from '../utils/constants';
 
+const LOG_PREFIX = '[SideTabs.SettingsService]';
+
 /**
  * Service to manage and listen to VS Code settings
  */
@@ -13,6 +15,7 @@ export class SettingsService {
 
 	constructor(private readonly context: vscode.ExtensionContext) {
 		this.setupConfigurationListener();
+		console.log(`${LOG_PREFIX} Initialized`);
 	}
 
 	/**
@@ -49,6 +52,7 @@ export class SettingsService {
 			}
 
 			if (hasChanges) {
+				console.log(`${LOG_PREFIX} Configuration changed:`, Object.keys(changes));
 				this._onDidChangeSettings.fire(changes as SettingsChangeEvent);
 			}
 		});
@@ -141,6 +145,7 @@ export class SettingsService {
 	 */
 	dispose(): void {
 		this._onDidChangeSettings.dispose();
+		console.log(`${LOG_PREFIX} Disposed`);
 	}
 }
 

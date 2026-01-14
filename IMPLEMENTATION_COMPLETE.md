@@ -5,7 +5,7 @@
 **Status**: Phase 9 (Polish & Cross-Cutting Concerns) - COMPLETE
 
 **Date**: 2026-01-14  
-**Version**: 0.1.0
+**Version**: 0.1.1
 
 ---
 
@@ -94,6 +94,9 @@ The SideTabs VS Code extension has been fully implemented with all planned featu
 - Complete README documentation
 - Validation checklist creation
 - Performance baseline documentation
+- Bug fix: Drag and drop sorting and grouping persistence
+- Logging added to SettingsService
+- Unit tests added for TabSyncService
 
 ## Feature Summary
 
@@ -141,6 +144,7 @@ The SideTabs VS Code extension has been fully implemented with all planned featu
 - ✅ Jest configured for unit tests
 - ✅ Foundation in place for integration tests
 - ✅ Manual validation procedures documented
+- ✅ TabSyncService tests verify persistence integration
 
 ### Documentation
 - ✅ Comprehensive README.md
