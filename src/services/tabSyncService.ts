@@ -83,11 +83,16 @@ export class TabSyncService {
 						let sortOrder = existingTab?.sortOrder ?? 0;
 						let groupId = existingTab?.groupId ?? null;
 						
-						if (this.persistenceService && !existingTab) {
-							// First time seeing this tab, restore from persistence
+						if (this.persistenceService) {
+							// Always prefer persistence service as the source of truth for layout
 							try {
-								sortOrder = this.persistenceService.getTabSortOrder(id) ?? 0;
-								groupId = this.persistenceService.getTabGroupId(id);
+								const persistedSortOrder = this.persistenceService.getTabSortOrder(id);
+								const persistedGroupId = this.persistenceService.getTabGroupId(id);
+								
+								// Only use persisted values if they exist (though the service returns defaults)
+								// For sortOrder, 0 is the default, so we can just use it
+								sortOrder = persistedSortOrder ?? 0;
+								groupId = persistedGroupId;
 							} catch (err) {
 								console.warn(`${LOG_PREFIX} Failed to restore persistence for ${id}:`, err);
 							}
