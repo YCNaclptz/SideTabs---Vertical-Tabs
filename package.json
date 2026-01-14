@@ -1,0 +1,193 @@
+{
+	"name": "sidetabs",
+	"displayName": "SideTabs - Vertical Tabs",
+	"description": "Vertical tab management in sidebar",
+	"version": "0.1.0",
+	"publisher": "sidetabs",
+	"engines": {
+		"vscode": "^1.85.0"
+	},
+	"categories": [
+		"Other"
+	],
+	"activationEvents": [
+		"onStartupFinished"
+	],
+	"main": "./out/extension.js",
+	"contributes": {
+		"viewsContainers": {
+			"activitybar": [
+				{
+					"id": "sideTabs",
+					"title": "Vertical Tabs",
+					"icon": "resources/icon.svg"
+				}
+			]
+		},
+		"views": {
+			"sideTabs": [
+				{
+					"id": "verticalTabsView",
+					"name": "Open Tabs",
+					"contextualTitle": "Vertical Tabs"
+				}
+			]
+		},
+		"commands": [
+			{
+				"command": "sideTabs.openTab",
+				"title": "Open Tab",
+				"category": "SideTabs"
+			},
+			{
+				"command": "sideTabs.closeTab",
+				"title": "Close Tab",
+				"category": "SideTabs"
+			},
+			{
+				"command": "sideTabs.revealInExplorer",
+				"title": "Reveal in File Explorer",
+				"category": "SideTabs"
+			},
+			{
+				"command": "sideTabs.copyPath",
+				"title": "Copy Path",
+				"category": "SideTabs"
+			},
+			{
+				"command": "sideTabs.copyRelativePath",
+				"title": "Copy Relative Path",
+				"category": "SideTabs"
+			},
+			{
+				"command": "sideTabs.createGroup",
+				"title": "Create New Group",
+				"category": "SideTabs",
+				"icon": "$(add)"
+			},
+			{
+				"command": "sideTabs.renameGroup",
+				"title": "Rename Group",
+				"category": "SideTabs"
+			},
+			{
+				"command": "sideTabs.deleteGroup",
+				"title": "Delete Group",
+				"category": "SideTabs"
+			},
+			{
+				"command": "sideTabs.toggleGroupCollapse",
+				"title": "Toggle Group Collapse",
+				"category": "SideTabs"
+			}
+		],
+		"menus": {
+			"view/title": [
+				{
+					"command": "sideTabs.createGroup",
+					"when": "view == verticalTabsView",
+					"group": "navigation"
+				}
+			],
+			"view/item/context": [
+				{
+					"command": "sideTabs.closeTab",
+					"when": "view == verticalTabsView && viewItem == tab",
+					"group": "1_close"
+				},
+				{
+					"command": "sideTabs.revealInExplorer",
+					"when": "view == verticalTabsView && viewItem == tab",
+					"group": "2_file"
+				},
+				{
+					"command": "sideTabs.copyPath",
+					"when": "view == verticalTabsView && viewItem == tab",
+					"group": "2_file"
+				},
+				{
+					"command": "sideTabs.copyRelativePath",
+					"when": "view == verticalTabsView && viewItem == tab",
+					"group": "2_file"
+				},
+				{
+					"command": "sideTabs.renameGroup",
+					"when": "view == verticalTabsView && viewItem == group",
+					"group": "1_group"
+				},
+				{
+					"command": "sideTabs.deleteGroup",
+					"when": "view == verticalTabsView && viewItem == group",
+					"group": "1_group"
+				}
+			]
+		},
+		"configuration": {
+			"title": "SideTabs",
+			"properties": {
+				"sideTabs.fontSize": {
+					"type": "number",
+					"default": 13,
+					"minimum": 8,
+					"maximum": 24,
+					"description": "Font size for tab labels in pixels"
+				},
+				"sideTabs.errorColor": {
+					"type": "string",
+					"default": "#f14c4c",
+					"format": "color",
+					"description": "Color for tabs with errors"
+				},
+				"sideTabs.warningColor": {
+					"type": "string",
+					"default": "#cca700",
+					"format": "color",
+					"description": "Color for tabs with warnings"
+				},
+				"sideTabs.showFileIcons": {
+					"type": "boolean",
+					"default": true,
+					"description": "Show file type icons next to tab names"
+				},
+				"sideTabs.maxFileNameLength": {
+					"type": "number",
+					"default": 30,
+					"minimum": 10,
+					"maximum": 100,
+					"description": "Maximum file name length before truncation"
+				},
+				"sideTabs.sortMode": {
+					"type": "string",
+					"enum": [
+						"manual",
+						"alphabetical",
+						"recentlyUsed"
+					],
+					"default": "manual",
+					"description": "Default tab sorting mode"
+				}
+			}
+		}
+	},
+	"scripts": {
+		"compile": "tsc -p ./",
+		"watch": "tsc -watch -p ./",
+		"lint": "eslint src --ext ts",
+		"test": "jest",
+		"vscode:prepublish": "npm run compile"
+	},
+	"devDependencies": {
+		"@types/jest": "^30.0.0",
+		"@types/node": "^25.0.8",
+		"@types/vscode": "^1.108.1",
+		"@typescript-eslint/eslint-plugin": "^8.53.0",
+		"@typescript-eslint/parser": "^8.53.0",
+		"@vscode/test-electron": "^2.5.2",
+		"esbuild": "^0.27.2",
+		"eslint": "^9.39.2",
+		"jest": "^30.2.0",
+		"prettier": "^3.7.4",
+		"ts-jest": "^29.4.6",
+		"typescript": "^5.9.3"
+	}
+}

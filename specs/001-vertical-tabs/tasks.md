@@ -38,14 +38,14 @@ tests/
 
 **Purpose**: VS Code extension project initialization and basic structure
 
-- [ ] T001 Initialize npm project with package.json per quickstart.md in package.json
-- [ ] T002 [P] Create TypeScript configuration in tsconfig.json
-- [ ] T003 [P] Create VS Code launch configuration in .vscode/launch.json
-- [ ] T004 [P] Create VS Code tasks configuration in .vscode/tasks.json
-- [ ] T005 [P] Create project directory structure: src/providers/, src/models/, src/services/, src/commands/, src/utils/
-- [ ] T006 [P] Create tests directory structure: tests/unit/models/, tests/unit/services/, tests/integration/
-- [ ] T007 [P] Create extension icon in resources/icon.svg
-- [ ] T008 Install development dependencies (typescript, @types/vscode, @types/node, @vscode/test-electron, jest, esbuild)
+- [X] T001 Initialize npm project with package.json per quickstart.md in package.json
+- [X] T002 [P] Create TypeScript configuration in tsconfig.json
+- [X] T003 [P] Create VS Code launch configuration in .vscode/launch.json
+- [X] T004 [P] Create VS Code tasks configuration in .vscode/tasks.json
+- [X] T005 [P] Create project directory structure: src/providers/, src/models/, src/services/, src/commands/, src/utils/
+- [X] T006 [P] Create tests directory structure: tests/unit/models/, tests/unit/services/, tests/integration/
+- [X] T007 [P] Create extension icon in resources/icon.svg
+- [X] T008 Install development dependencies (typescript, @types/vscode, @types/node, @vscode/test-electron, jest, esbuild)
 
 ---
 
@@ -55,14 +55,14 @@ tests/
 
 **⚠️ CRITICAL**: No user story work can begin until this phase is complete
 
-- [ ] T009 Configure package.json with extension manifest: viewsContainers, views, activationEvents per contracts/api.md
-- [ ] T010 [P] Create constants file with configuration keys in src/utils/constants.ts
-- [ ] T011 [P] Create path utilities with disambiguation algorithm in src/utils/pathUtils.ts
-- [ ] T012 Create base Tab interface and DiagnosticStatus enum in src/models/tab.ts
-- [ ] T013 [P] Create TabGroup interface in src/models/tabGroup.ts
-- [ ] T014 [P] Create TabState interface for persistence in src/models/tabState.ts
-- [ ] T015 Create TabTreeItem types (TabItem, GroupItem) for TreeDataProvider in src/models/treeItems.ts
-- [ ] T016 Create extension entry point skeleton with activation/deactivation in src/extension.ts
+- [X] T009 Configure package.json with extension manifest: viewsContainers, views, activationEvents per contracts/api.md
+- [X] T010 [P] Create constants file with configuration keys in src/utils/constants.ts
+- [X] T011 [P] Create path utilities with disambiguation algorithm in src/utils/pathUtils.ts
+- [X] T012 Create base Tab interface and DiagnosticStatus enum in src/models/tab.ts
+- [X] T013 [P] Create TabGroup interface in src/models/tabGroup.ts
+- [X] T014 [P] Create TabState interface for persistence in src/models/tabState.ts
+- [X] T015 Create TabTreeItem types (TabItem, GroupItem) for TreeDataProvider in src/models/treeItems.ts
+- [X] T016 Create extension entry point skeleton with activation/deactivation in src/extension.ts
 
 **Checkpoint**: Foundation ready - user story implementation can now begin in parallel
 
@@ -76,13 +76,13 @@ tests/
 
 ### Implementation for User Story 1
 
-- [ ] T017 [US1] Implement TabSyncService to sync VS Code tabs using window.tabGroups API in src/services/tabSyncService.ts
-- [ ] T018 [US1] Implement TabTreeProvider with getTreeItem and getChildren methods in src/providers/tabTreeProvider.ts
-- [ ] T019 [US1] Register TreeView with treeDataProvider in src/extension.ts
-- [ ] T020 [US1] Implement tab change listener (onDidChangeTabs) to refresh TreeView in src/extension.ts
-- [ ] T021 [US1] Add sideTabs.openTab command registration in src/commands/index.ts
-- [ ] T022 [US1] Configure TreeItem click handler to open file using vscode.open command in src/providers/tabTreeProvider.ts
-- [ ] T023 [US1] Implement file name display with tooltip showing full path in src/providers/tabTreeProvider.ts
+- [X] T017 [US1] Implement TabSyncService to sync VS Code tabs using window.tabGroups API in src/services/tabSyncService.ts
+- [X] T018 [US1] Implement TabTreeProvider with getTreeItem and getChildren methods in src/providers/tabTreeProvider.ts
+- [X] T019 [US1] Register TreeView with treeDataProvider in src/extension.ts
+- [X] T020 [US1] Implement tab change listener (onDidChangeTabs) to refresh TreeView in src/extension.ts
+- [X] T021 [US1] Add sideTabs.openTab command registration in src/commands/index.ts
+- [X] T022 [US1] Configure TreeItem click handler to open file using vscode.open command in src/providers/tabTreeProvider.ts
+- [X] T023 [US1] Implement file name display with tooltip showing full path in src/providers/tabTreeProvider.ts
 
 **Checkpoint**: User Story 1 complete - basic vertical tabs with click-to-switch functionality
 
@@ -96,12 +96,12 @@ tests/
 
 ### Implementation for User Story 2
 
-- [ ] T024 [US2] Implement DiagnosticService to listen diagnostics using languages.onDidChangeDiagnostics in src/services/diagnosticService.ts
-- [ ] T025 [US2] Add diagnostic status tracking (Error/Warning/None) to Tab model in src/services/tabSyncService.ts
-- [ ] T026 [US2] Implement isDirty tracking using workspace.onDidChangeTextDocument in src/services/tabSyncService.ts
-- [ ] T027 [US2] Update TabTreeProvider to show "(modified)" description for dirty files in src/providers/tabTreeProvider.ts
-- [ ] T028 [US2] Implement FileDecorationProvider for error/warning colors in src/providers/tabDecorationProvider.ts
-- [ ] T029 [US2] Register FileDecorationProvider in extension activation in src/extension.ts
+- [X] T024 [US2] Implement DiagnosticService to listen diagnostics using languages.onDidChangeDiagnostics in src/services/diagnosticService.ts
+- [X] T025 [US2] Add diagnostic status tracking (Error/Warning/None) to Tab model in src/services/tabSyncService.ts
+- [X] T026 [US2] Implement isDirty tracking using workspace.onDidChangeTextDocument in src/services/tabSyncService.ts
+- [X] T027 [US2] Update TabTreeProvider to show "(modified)" description for dirty files in src/providers/tabTreeProvider.ts
+- [X] T028 [US2] Implement FileDecorationProvider for error/warning colors in src/providers/tabDecorationProvider.ts
+- [X] T029 [US2] Register FileDecorationProvider in extension activation in src/extension.ts
 
 **Checkpoint**: User Story 2 complete - tabs show dirty state and diagnostic colors
 
