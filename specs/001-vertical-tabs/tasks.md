@@ -115,12 +115,12 @@ tests/
 
 ### Implementation for User Story 3
 
-- [ ] T030 [US3] Implement PersistenceService using workspaceState in src/services/persistenceService.ts
-- [ ] T031 [US3] Implement TabDragAndDropController with handleDrag method in src/providers/tabDragAndDropController.ts
-- [ ] T032 [US3] Implement handleDrop method for reordering tabs in src/providers/tabDragAndDropController.ts
-- [ ] T033 [US3] Register DragAndDropController in TreeView creation in src/extension.ts
-- [ ] T034 [US3] Add sortOrder tracking to TabState and persist on change in src/services/persistenceService.ts
-- [ ] T035 [US3] Restore tab order from workspaceState on activation in src/extension.ts
+- [x] T030 [US3] Implement PersistenceService using workspaceState in src/services/persistenceService.ts
+- [x] T031 [US3] Implement TabDragAndDropController with handleDrag method in src/providers/tabDragAndDropController.ts
+- [x] T032 [US3] Implement handleDrop method for reordering tabs in src/providers/tabDragAndDropController.ts
+- [x] T033 [US3] Register DragAndDropController in TreeView creation in src/extension.ts
+- [x] T034 [US3] Add sortOrder tracking to TabState and persist on change in src/services/persistenceService.ts
+- [x] T035 [US3] Restore tab order from workspaceState on activation in src/extension.ts
 
 **Checkpoint**: User Story 3 complete - tabs can be reordered via drag-drop with persistence
 
@@ -134,16 +134,16 @@ tests/
 
 ### Implementation for User Story 4
 
-- [ ] T036 [US4] Add group management methods to PersistenceService in src/services/persistenceService.ts
-- [ ] T037 [US4] Implement sideTabs.createGroup command with input box in src/commands/index.ts
-- [ ] T038 [US4] Implement sideTabs.renameGroup command in src/commands/index.ts
-- [ ] T039 [US4] Implement sideTabs.deleteGroup command in src/commands/index.ts
-- [ ] T040 [US4] Implement sideTabs.toggleGroupCollapse command in src/commands/index.ts
-- [ ] T041 [US4] Update TabTreeProvider to return GroupItem with collapsibleState in src/providers/tabTreeProvider.ts
-- [ ] T042 [US4] Update TabTreeProvider getChildren to return tabs within groups in src/providers/tabTreeProvider.ts
-- [ ] T043 [US4] Update DragAndDropController to handle tab-to-group drops in src/providers/tabDragAndDropController.ts
-- [ ] T044 [US4] Implement auto-delete empty groups logic in src/services/persistenceService.ts
-- [ ] T045 [US4] Register group context menu items in package.json contributes.menus
+- [X] T036 [US4] Add group management methods to PersistenceService in src/services/persistenceService.ts
+- [X] T037 [US4] Implement sideTabs.createGroup command with input box in src/commands/index.ts
+- [X] T038 [US4] Implement sideTabs.renameGroup command in src/commands/index.ts
+- [X] T039 [US4] Implement sideTabs.deleteGroup command in src/commands/index.ts
+- [X] T040 [US4] Implement sideTabs.toggleGroupCollapse command in src/commands/index.ts
+- [X] T041 [US4] Update TabTreeProvider to return GroupItem with collapsibleState in src/providers/tabTreeProvider.ts
+- [X] T042 [US4] Update TabTreeProvider getChildren to return tabs within groups in src/providers/tabTreeProvider.ts
+- [X] T043 [US4] Update DragAndDropController to handle tab-to-group drops in src/providers/tabDragAndDropController.ts
+- [X] T044 [US4] Implement auto-delete empty groups logic in src/services/persistenceService.ts
+- [X] T045 [US4] Register group context menu items in package.json contributes.menus
 
 **Checkpoint**: User Story 4 complete - full group management with drag-drop support
 
@@ -157,12 +157,12 @@ tests/
 
 ### Implementation for User Story 5
 
-- [ ] T046 [US5] Add configuration schema to package.json: fontSize, errorColor, warningColor, showFileIcons, maxFileNameLength
-- [ ] T047 [US5] Create SettingsService to read configuration using workspace.getConfiguration in src/services/settingsService.ts
-- [ ] T048 [US5] Listen configuration changes using workspace.onDidChangeConfiguration in src/services/settingsService.ts
-- [ ] T049 [US5] Update TabDecorationProvider to use custom errorColor/warningColor in src/providers/tabDecorationProvider.ts
-- [ ] T050 [US5] Update TabTreeProvider to respect maxFileNameLength setting in src/providers/tabTreeProvider.ts
-- [ ] T051 [US5] Update TabTreeProvider to conditionally show file icons based on showFileIcons in src/providers/tabTreeProvider.ts
+- [x] T046 [US5] Add configuration schema to package.json: fontSize, errorColor, warningColor, showFileIcons, maxFileNameLength
+- [x] T047 [US5] Create SettingsService to read configuration using workspace.getConfiguration in src/services/settingsService.ts
+- [x] T048 [US5] Listen configuration changes using workspace.onDidChangeConfiguration in src/services/settingsService.ts
+- [x] T049 [US5] Update TabDecorationProvider to use custom errorColor/warningColor in src/providers/tabDecorationProvider.ts
+- [x] T050 [US5] Update TabTreeProvider to respect maxFileNameLength setting in src/providers/tabTreeProvider.ts
+- [x] T051 [US5] Update TabTreeProvider to conditionally show file icons based on showFileIcons in src/providers/tabTreeProvider.ts
 
 **Checkpoint**: User Story 5 complete - appearance is customizable via VS Code settings
 
@@ -176,14 +176,14 @@ tests/
 
 ### Implementation for User Story 6
 
-- [ ] T052 [US6] Implement FileService with revealInExplorer method in src/services/fileService.ts
-- [ ] T053 [US6] Implement copyPath and copyRelativePath methods in src/services/fileService.ts
-- [ ] T054 [US6] Implement sideTabs.revealInExplorer command in src/commands/index.ts
-- [ ] T055 [US6] Implement sideTabs.copyPath command in src/commands/index.ts
-- [ ] T056 [US6] Implement sideTabs.copyRelativePath command in src/commands/index.ts
-- [ ] T057 [US6] Implement sideTabs.closeTab command in src/commands/index.ts
-- [ ] T058 [US6] Register tab context menu items in package.json contributes.menus
-- [ ] T059 [US6] Ensure tooltip shows full path in TabTreeProvider in src/providers/tabTreeProvider.ts
+- [x] T052 [US6] Implement FileService with revealInExplorer method in src/services/fileService.ts
+- [x] T053 [US6] Implement copyPath and copyRelativePath methods in src/services/fileService.ts
+- [x] T054 [US6] Implement sideTabs.revealInExplorer command in src/commands/index.ts
+- [x] T055 [US6] Implement sideTabs.copyPath command in src/commands/index.ts
+- [x] T056 [US6] Implement sideTabs.copyRelativePath command in src/commands/index.ts
+- [x] T057 [US6] Implement sideTabs.closeTab command in src/commands/index.ts
+- [x] T058 [US6] Register tab context menu items in package.json contributes.menus
+- [x] T059 [US6] Ensure tooltip shows full path in TabTreeProvider in src/providers/tabTreeProvider.ts
 
 **Checkpoint**: User Story 6 complete - file path viewing and location features work
 
@@ -193,12 +193,12 @@ tests/
 
 **Purpose**: Improvements that affect multiple user stories
 
-- [ ] T060 [P] Implement path disambiguation for same-name files using pathUtils in src/providers/tabTreeProvider.ts
-- [ ] T061 [P] Add error handling and logging throughout services in src/services/
-- [ ] T062 [P] Code cleanup: ensure consistent naming and TypeScript strict compliance
-- [ ] T063 [P] Create README.md with installation and usage instructions
-- [ ] T064 Run quickstart.md validation checklist
-- [ ] T065 [P] Performance validation: test with 100+ tabs open
+- [x] T060 [P] Implement path disambiguation for same-name files using pathUtils in src/providers/tabTreeProvider.ts
+- [x] T061 [P] Add error handling and logging throughout services in src/services/
+- [x] T062 [P] Code cleanup: ensure consistent naming and TypeScript strict compliance
+- [x] T063 [P] Create README.md with installation and usage instructions
+- [x] T064 Run quickstart.md validation checklist
+- [x] T065 [P] Performance validation: test with 100+ tabs open
 
 ---
 

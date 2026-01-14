@@ -1,7 +1,7 @@
 // @format
 
 import * as vscode from 'vscode';
-import { TabTreeItem, TabItem, GroupItem, isTabItem, isGroupItem } from '../models/treeItems';
+import { TabTreeItem, isTabItem, isGroupItem } from '../models/treeItems';
 import { MIME_TYPES } from '../utils/constants';
 import { PersistenceService } from '../services/persistenceService';
 import { TabSyncService } from '../services/tabSyncService';

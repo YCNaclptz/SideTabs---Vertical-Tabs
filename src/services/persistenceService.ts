@@ -116,12 +116,20 @@ export class PersistenceService {
 	 * Assign a tab to a group
 	 */
 	async assignTabToGroup(tabId: string, groupId: string | null): Promise<void> {
+		const oldGroupId = this.state.tabGroupAssignments[tabId];
+		
 		if (groupId === null) {
 			delete this.state.tabGroupAssignments[tabId];
 		} else {
 			this.state.tabGroupAssignments[tabId] = groupId;
 		}
+		
 		await this.saveState();
+		
+		// Auto-delete empty group if the old group now has no tabs
+		if (oldGroupId && oldGroupId !== groupId) {
+			await this.deleteGroupIfEmpty(oldGroupId);
+		}
 	}
 
 	/**
@@ -169,9 +177,31 @@ export class PersistenceService {
 	 * Remove tab from all tracking (when tab is closed)
 	 */
 	async removeTab(tabId: string): Promise<void> {
+		const oldGroupId = this.state.tabGroupAssignments[tabId];
+		
 		delete this.state.tabGroupAssignments[tabId];
 		delete this.state.customSortOrder[tabId];
 		await this.saveState();
+		
+		// Auto-delete empty group if it now has no tabs
+		if (oldGroupId) {
+			await this.deleteGroupIfEmpty(oldGroupId);
+		}
+	}
+
+	/**
+	 * Delete a group if it has no tabs
+	 */
+	private async deleteGroupIfEmpty(groupId: string): Promise<void> {
+		const hasTabsInGroup = Object.values(this.state.tabGroupAssignments).some(
+			(gid) => gid === groupId
+		);
+
+		if (!hasTabsInGroup) {
+			this.state.groups = this.state.groups.filter((g) => g.id !== groupId);
+			delete this.state.groupSortOrder[groupId];
+			await this.saveState();
+		}
 	}
 
 	/**

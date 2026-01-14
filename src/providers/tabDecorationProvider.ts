@@ -2,7 +2,7 @@
 
 import * as vscode from 'vscode';
 import { DiagnosticStatus } from '../models/tab';
-import { CONFIG_KEYS, DEFAULTS } from '../utils/constants';
+import { SettingsService, AllSettings } from '../services/settingsService';
 
 /**
  * File decoration provider for error/warning colors
@@ -16,31 +16,24 @@ export class TabDecorationProvider
 		this._onDidChangeFileDecorations.event;
 
 	private diagnosticStatusMap: Map<string, DiagnosticStatus> = new Map();
-	private errorColor: string = DEFAULTS.ERROR_COLOR;
-	private warningColor: string = DEFAULTS.WARNING_COLOR;
+	private settings: AllSettings;
 
-	constructor() {
-		this.loadConfiguration();
+	constructor(private readonly settingsService: SettingsService) {
+		this.settings = settingsService.getAllSettings();
+		this.setupConfigurationListener();
 	}
 
 	/**
-	 * Load configuration values
+	 * Setup listener for configuration changes
 	 */
-	private loadConfiguration(): void {
-		const config = vscode.workspace.getConfiguration();
-		this.errorColor =
-			config.get<string>(CONFIG_KEYS.ERROR_COLOR) || DEFAULTS.ERROR_COLOR;
-		this.warningColor =
-			config.get<string>(CONFIG_KEYS.WARNING_COLOR) || DEFAULTS.WARNING_COLOR;
+	private setupConfigurationListener(): void {
+		this.settingsService.onDidChangeSettings((_changes) => {
+			this.settings = this.settingsService.getAllSettings();
+			this.refresh();
+		});
 	}
 
-	/**
-	 * Update configuration (called when settings change)
-	 */
-	updateConfiguration(): void {
-		this.loadConfiguration();
-		this.refresh();
-	}
+
 
 	/**
 	 * Update diagnostic statuses

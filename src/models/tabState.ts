@@ -42,16 +42,23 @@ export function createEmptyTabState(version: number): TabState {
 /**
  * Validate tab state structure
  */
-export function isValidTabState(state: any): state is TabState {
+export function isValidTabState(state: unknown): state is TabState {
+	if (
+		!state ||
+		typeof state !== 'object'
+	) {
+		return false;
+	}
+
+	const obj = state as Record<string, unknown>;
+
 	return (
-		state &&
-		typeof state === 'object' &&
-		typeof state.version === 'number' &&
-		Array.isArray(state.groups) &&
-		typeof state.tabGroupAssignments === 'object' &&
-		typeof state.customSortOrder === 'object' &&
-		typeof state.groupSortOrder === 'object' &&
-		typeof state.lastUpdated === 'number'
+		typeof obj.version === 'number' &&
+		Array.isArray(obj.groups) &&
+		typeof obj.tabGroupAssignments === 'object' &&
+		typeof obj.customSortOrder === 'object' &&
+		typeof obj.groupSortOrder === 'object' &&
+		typeof obj.lastUpdated === 'number'
 	);
 }
 

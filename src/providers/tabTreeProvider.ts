@@ -4,6 +4,23 @@ import * as vscode from 'vscode';
 import { TabTreeItem, TabItem, GroupItem } from '../models/treeItems';
 import { Tab } from '../models/tab';
 import { TabGroup } from '../models/tabGroup';
+import { CONFIG_KEYS, DEFAULTS } from '../utils/constants';
+import { getDisambiguatedName } from '../utils/pathUtils';
+
+/**
+ * Truncate file name to maximum length
+ */
+function truncateFileName(
+	displayName: string,
+	maxLength: number
+): string {
+	if (displayName.length <= maxLength) {
+		return displayName;
+	}
+
+	// Truncate with ellipsis
+	return displayName.substring(0, maxLength - 1) + '…';
+}
 
 /**
  * Tree data provider for the vertical tabs view
@@ -18,6 +35,41 @@ export class TabTreeProvider
 
 	private tabs: Tab[] = [];
 	private groups: TabGroup[] = [];
+	private maxFileNameLength: number = DEFAULTS.MAX_FILE_NAME_LENGTH;
+	private showFileIcons: boolean = DEFAULTS.SHOW_FILE_ICONS;
+
+	constructor() {
+		this.loadConfiguration();
+		this.setupConfigurationListener();
+	}
+
+	/**
+	 * Load configuration values
+	 */
+	private loadConfiguration(): void {
+		const config = vscode.workspace.getConfiguration();
+		this.maxFileNameLength =
+			config.get<number>(CONFIG_KEYS.MAX_FILE_NAME_LENGTH) ??
+			DEFAULTS.MAX_FILE_NAME_LENGTH;
+		this.showFileIcons =
+			config.get<boolean>(CONFIG_KEYS.SHOW_FILE_ICONS) ??
+			DEFAULTS.SHOW_FILE_ICONS;
+	}
+
+	/**
+	 * Setup listener for configuration changes
+	 */
+	private setupConfigurationListener(): void {
+		vscode.workspace.onDidChangeConfiguration((event) => {
+			if (
+				event.affectsConfiguration(CONFIG_KEYS.MAX_FILE_NAME_LENGTH) ||
+				event.affectsConfiguration(CONFIG_KEYS.SHOW_FILE_ICONS)
+			) {
+				this.loadConfiguration();
+				this.refresh();
+			}
+		});
+	}
 
 	/**
 	 * Set tabs to display
@@ -44,6 +96,41 @@ export class TabTreeProvider
 	 * Get tree item representation
 	 */
 	getTreeItem(element: TabTreeItem): vscode.TreeItem {
+		// For tab items, create a modified version with truncated names
+		if (element instanceof TabItem) {
+			// Get disambiguated name for files with same name
+			const disambiguatedName = getDisambiguatedName(
+				element.tab.uri,
+				this.tabs.map(t => t.uri)
+			);
+			
+			const truncatedName = truncateFileName(
+				disambiguatedName,
+				this.maxFileNameLength
+			);
+			
+			// Create a copy with truncated label
+			const treeItem = new vscode.TreeItem(
+				truncatedName,
+				vscode.TreeItemCollapsibleState.None
+			);
+			treeItem.id = element.id;
+			treeItem.tooltip = element.tab.uri.fsPath;
+			treeItem.resourceUri = element.tab.uri;
+			treeItem.contextValue = element.contextValue;
+			treeItem.command = element.command;
+			if (element.tab.isDirty) {
+				treeItem.description = '(modified)';
+			}
+
+			// Apply icon settings
+			if (!this.showFileIcons) {
+				treeItem.iconPath = undefined;
+			}
+
+			return treeItem;
+		}
+
 		return element;
 	}
 

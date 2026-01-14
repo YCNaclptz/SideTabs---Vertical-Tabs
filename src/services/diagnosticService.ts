@@ -3,6 +3,8 @@
 import * as vscode from 'vscode';
 import { DiagnosticStatus } from '../models/tab';
 
+const LOG_PREFIX = '[SideTabs.DiagnosticService]';
+
 /**
  * Service to track diagnostic status of files
  */
@@ -15,24 +17,33 @@ export class DiagnosticService {
 	private diagnosticStatusMap: Map<string, DiagnosticStatus> = new Map();
 
 	constructor() {
-		// Listen for diagnostic changes
-		vscode.languages.onDidChangeDiagnostics((event) => {
-			this.handleDiagnosticChange(event);
-		});
+		try {
+			// Listen for diagnostic changes
+			vscode.languages.onDidChangeDiagnostics((event) => {
+				this.handleDiagnosticChange(event);
+			});
 
-		// Initialize with current diagnostics
-		this.initializeDiagnostics();
+			// Initialize with current diagnostics
+			this.initializeDiagnostics();
+			console.log(`${LOG_PREFIX} Initialized with ${this.diagnosticStatusMap.size} files with diagnostics`);
+		} catch (error) {
+			console.error(`${LOG_PREFIX} Error during initialization:`, error);
+		}
 	}
 
 	/**
 	 * Initialize diagnostics for all open files
 	 */
 	private initializeDiagnostics(): void {
-		const diagnostics = vscode.languages.getDiagnostics();
+		try {
+			const diagnostics = vscode.languages.getDiagnostics();
 
-		for (const [uri, fileDiagnostics] of diagnostics) {
-			const status = this.calculateDiagnosticStatus(fileDiagnostics);
-			this.diagnosticStatusMap.set(uri.toString(), status);
+			for (const [uri, fileDiagnostics] of diagnostics) {
+				const status = this.calculateDiagnosticStatus(fileDiagnostics);
+				this.diagnosticStatusMap.set(uri.toString(), status);
+			}
+		} catch (error) {
+			console.error(`${LOG_PREFIX} Error initializing diagnostics:`, error);
 		}
 	}
 
@@ -40,21 +51,26 @@ export class DiagnosticService {
 	 * Handle diagnostic change event
 	 */
 	private handleDiagnosticChange(event: vscode.DiagnosticChangeEvent): void {
-		for (const uri of event.uris) {
-			const diagnostics = vscode.languages.getDiagnostics(uri);
-			const status = this.calculateDiagnosticStatus(diagnostics);
-			const uriString = uri.toString();
+		try {
+			for (const uri of event.uris) {
+				const diagnostics = vscode.languages.getDiagnostics(uri);
+				const status = this.calculateDiagnosticStatus(diagnostics);
+				const uriString = uri.toString();
 
-			// Update status
-			if (status === DiagnosticStatus.None) {
-				this.diagnosticStatusMap.delete(uriString);
-			} else {
-				this.diagnosticStatusMap.set(uriString, status);
+				// Update status
+				if (status === DiagnosticStatus.None) {
+					this.diagnosticStatusMap.delete(uriString);
+				} else {
+					this.diagnosticStatusMap.set(uriString, status);
+				}
 			}
-		}
 
-		// Notify listeners
-		this._onDidChangeDiagnostics.fire(this.diagnosticStatusMap);
+			// Notify listeners
+			this._onDidChangeDiagnostics.fire(this.diagnosticStatusMap);
+			console.log(`${LOG_PREFIX} Updated diagnostics for ${event.uris.length} files`);
+		} catch (error) {
+			console.error(`${LOG_PREFIX} Error handling diagnostic change:`, error);
+		}
 	}
 
 	/**
@@ -103,5 +119,6 @@ export class DiagnosticService {
 	 */
 	dispose(): void {
 		this._onDidChangeDiagnostics.dispose();
+		console.log(`${LOG_PREFIX} Disposed`);
 	}
 }
